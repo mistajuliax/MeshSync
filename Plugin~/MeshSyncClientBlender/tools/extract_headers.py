@@ -5,13 +5,13 @@ import re
 import shutil
 
 if (len(sys.argv) != 2):
-    print('Usage: %s blender_source_dir' % sys.argv[0])
+    print(f'Usage: {sys.argv[0]} blender_source_dir')
     quit()
 
 src_dir = sys.argv[1]
 dst_dir = os.getcwd()
 
-os.chdir(src_dir + '/source/blender')
+os.chdir(f'{src_dir}/source/blender')
 print(os.getcwd())
 
 def cond(f):
@@ -34,5 +34,10 @@ for target in [
     'makesrna',
     'python'
     ]:
-    shutil.copytree(target, dst_dir+'/'+target,
-        ignore = lambda dir, list: [f for f in list if os.path.isfile(dir + '/' + f) and not cond(f)])
+    shutil.copytree(
+        target,
+        f'{dst_dir}/{target}',
+        ignore=lambda dir, list: [
+            f for f in list if os.path.isfile(f'{dir}/{f}') and not cond(f)
+        ],
+    )

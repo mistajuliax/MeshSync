@@ -93,10 +93,7 @@ class MESHSYNC_OT_AutoSync(bpy.types.Operator):
 
     def invoke(self, context, event):
         scene = bpy.context.scene
-        if not scene.meshsync_auto_sync:
-            scene.meshsync_auto_sync = True
-        else:
-            scene.meshsync_auto_sync = False
+        scene.meshsync_auto_sync = not scene.meshsync_auto_sync
         return {'FINISHED'}
 
 

@@ -53,10 +53,12 @@ def msb_on_bake_transform_updated(self = None, context = None):
 
 def msb_on_toggle_auto_sync(self = None, context = None):
     msb_apply_scene_settings()
-    if bpy.context.scene.meshsync_auto_sync:
-        if not msb_context.is_server_available:
-            print("MeshSync: " + msb_context.error_message)
-            bpy.context.scene.meshsync_auto_sync = False
+    if (
+        bpy.context.scene.meshsync_auto_sync
+        and not msb_context.is_server_available
+    ):
+        print(f"MeshSync: {msb_context.error_message}")
+        bpy.context.scene.meshsync_auto_sync = False
     if bpy.context.scene.meshsync_auto_sync:
         msb_context.setup(bpy.context)
         msb_context.export(msb_context.TARGET_OBJECTS)
